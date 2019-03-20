@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Webcam</title>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background-color: #000;
+            }
+
+            html, body, video {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <video id="video"></video>
+
+        <script>
+            var v = document.getElementById('video');
+
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(function(stream) {
+                    v.srcObject = stream;
+                    v.onloadedmetadata = function() {
+                        v.play();
+                    };
+                })
+                .catch(function(e) {
+                    alert('video is not available');
+
+                    console.log(e);
+                });
+        </script>
+    </body>
+</html>
